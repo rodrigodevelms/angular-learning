@@ -1,0 +1,22 @@
+a {
+  text-decoration: none;
+}
+.nav-caption {
+  display: inline-block;
+  padding-left: 10px;
+  color: #0b5345;
+}
+
+.nav-caption:hover {
+  color: #16a085;
+}
+
+
+
+.mat-icon{
+  color: #117a65;
+}
+
+.mat-icon:hover, mat-icon:active {
+  color: #16a085;
+}

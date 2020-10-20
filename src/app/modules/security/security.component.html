@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Entrar</h1>
+<form (ngSubmit)="doLogin()" [formGroup]="securityForm">
+  <mat-dialog-content>
+
+    <mat-form-field appearance="legacy">
+      <mat-label for="username">Usuário</mat-label>
+      <input matInput placeholder="Informe o usuário" id="username" type="text"
+             formControlName="username">
+      <mat-error *ngIf="securityForm.get('username').invalid">{{validateField('username', 'usuário')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label for="password">Senha</mat-label>
+      <input matInput placeholder="Digite sua se eu tenhsenha" id="password" type="password"
+             formControlName="password">
+      <mat-error *ngIf="securityForm.get('password').invalid">{{validateField('password', 'senha')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label for="company">Empresa</mat-label>
+      <input matInput placeholder="Escolha a empresa" id="company" type="text"
+             formControlName="company">
+      <mat-error *ngIf="securityForm.get('company').invalid">{{validateField('company', 'empresa')}}</mat-error>
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()" class="btn-raised">Cancelar</button>
+    <button mat-button class="btn-raised" id="login-submit" type="submit"
+            [disabled]="!securityForm.valid">Entrar
+    </button>
+  </div>
+</form>

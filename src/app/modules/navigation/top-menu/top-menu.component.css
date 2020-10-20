@@ -1,0 +1,42 @@
+a {
+  text-decoration: none;
+  color: #0b5345;
+}
+
+a:hover, a:active {
+  color: #117a65;
+}
+
+.navigation-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mat-toolbar {
+  background-color: #f7f9f9;
+  color: #117a65;
+  border-radius: 3px;
+}
+
+.mat-icon-button {
+  margin-right: 5px;
+}
+
+.mat-icon-button:hover {
+  color: #16a085;
+}
+
+.mat-mini-fab {
+  background-color: #117a65;
+}
+
+.mat-mini-fab:hover {
+  background-color: #16a085;
+}
+
+@media (max-width: 959px) {
+  mat-toolbar {
+    border-radius: 0;
+  }
+}

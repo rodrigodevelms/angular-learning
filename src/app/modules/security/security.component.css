@@ -1,0 +1,37 @@
+h1 {
+  color: #0b5345;
+}
+
+.mat-dialog-title {
+  width: 100%;
+}
+
+.mat-dialog-title {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.mat-form-field {
+  padding-left: 5%;
+  padding-bottom: 5%;
+  width: 88%;
+}
+
+.btn-raised:hover,
+.btn-raised:active  {
+  color: white;
+  background-color:  #117a65 ;
+}
+
+.btn-raised:disabled,
+.btn-raised[disabled]{
+  background-color: white;
+  color: #666666;
+}
+.mat-input-invalid .mat-input-placeholder {
+  color: yellow;
+}
+
+.mat-input-invalid .mat-input-ripple {
+  background-color: yellow;
+}
