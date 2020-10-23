@@ -1,0 +1,54 @@
+h1 {
+  margin: 10% 0 5% 0;
+}
+
+.mat-dialog-title {
+  width: 100%;
+}
+
+.mat-dialog-title {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.mat-form-field {
+  padding-left: 5%;
+  width: 90%;
+}
+
+.sec-log-btn {
+  color: white;
+  width: 200px!important;
+  min-width: unset!important;
+  background-color: #039be5;
+}
+
+.sec-log-btn:hover,
+.sec-log-btn:active {
+  color: white;
+  opacity: 0.8;
+  width: 200px!important;
+  min-width: unset!important;
+}
+
+.sec-log-btn:disabled,
+.sec-log-btn[disabled] {
+  width: 200px!important;
+  min-width: unset!important;
+  background-color: #c8dde7;
+  color: white;
+}
+
+.mat-icon {
+  color: #e0e0e0;
+}
+
+.sec-log-forgot-password {
+  color: black;
+  text-decoration: none;
+}
+
+.sec-log-forgot-password:hover,
+.sec-log-forgot-password:active{
+  color: red;
+}

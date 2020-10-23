@@ -1,16 +1,19 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const navigationRoutes: Routes = [
-    { path: '', component: HomeComponent}
+  {path: '', component: HomeComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(navigationRoutes)
-    ],
-    exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(navigationRoutes)
+  ],
+  exports: [RouterModule]
 })
 
-export class NavigationRoutesModule {}
+export class NavigationRoutesModule {
+}

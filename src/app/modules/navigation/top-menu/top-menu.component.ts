@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {SecurityComponent} from "../../security/security.component";
+import {LoginComponent} from "../../security/login/login.component";
 
 @Component({
   selector: 'app-top-menu',
@@ -22,8 +22,9 @@ export class TopMenuComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(SecurityComponent, {
-      width: '35%',
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '450px',
+      height: '700ox',
       disableClose: true
     });
 

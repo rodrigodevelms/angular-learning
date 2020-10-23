@@ -6,15 +6,8 @@ html, body {
 
 body {
   margin: 0;
+  opacity: 0.9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden !important;
 }
-
-.mat-focused .mat-form-field-label {
-  color: #0b5345 !important;
-}
-
-.mat-form-field-ripple {
-  background-color: #0b5345 !important;
-}
-
 
