@@ -1,12 +1,21 @@
-h1 {
-  margin: 10% 0 5% 0;
+.sec-log-img-logo {
+  margin-top: 30px;
+  width: 60px;
+}
+
+.sec-log-title {
+  margin: 10% 0 10% 0;
+  font-family: Muli Helvetica Neue Arial sans-serif;
+  line-height: 1.4 !important;
+  letter-spacing: -.1px !important;
+}
+
+.sec-log-dialog-content {
+  margin-bottom: 10px;
 }
 
 .mat-dialog-title {
   width: 100%;
-}
-
-.mat-dialog-title {
   text-align: center;
   padding-bottom: 10px;
 }
@@ -18,8 +27,8 @@ h1 {
 
 .sec-log-btn {
   color: white;
-  width: 200px!important;
-  min-width: unset!important;
+  width: 200px !important;
+  min-width: unset !important;
   background-color: #039be5;
 }
 
@@ -27,14 +36,14 @@ h1 {
 .sec-log-btn:active {
   color: white;
   opacity: 0.8;
-  width: 200px!important;
-  min-width: unset!important;
+  width: 200px !important;
+  min-width: unset !important;
 }
 
 .sec-log-btn:disabled,
 .sec-log-btn[disabled] {
-  width: 200px!important;
-  min-width: unset!important;
+  width: 200px !important;
+  min-width: unset !important;
   background-color: #c8dde7;
   color: white;
 }
@@ -49,6 +58,6 @@ h1 {
 }
 
 .sec-log-forgot-password:hover,
-.sec-log-forgot-password:active{
+.sec-log-forgot-password:active {
   color: red;
 }

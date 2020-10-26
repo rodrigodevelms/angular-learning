@@ -25,7 +25,7 @@ export class SideMenuComponent implements OnInit {
       id: "123132",
       name: "Rodrigo Batista",
       position: "Sócio Proprietário",
-      photo: ".,/../../assets/photos/rodrigo.jpg",
+      photo: "../../../assets/photos/rodrigo.jpg",
       cards: [
         {
           title: "One",

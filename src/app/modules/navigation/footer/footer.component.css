@@ -1,11 +1,17 @@
 .footer {
-  background-color: #f7f9f9;
-  color: cornflowerblue;
+  /*background: url("../../../../assets/background/lines-dots.png") no-repeat center;*/
+  background: transparent;
+  color: #2d323e;
+  font-family: Muli Helvetica Neue Arial sans-serif !important;
+  font-size: 12px;
   align-content: center;
   text-align: center;
   padding-top: 1.5%;
-  margin: 0;
-  position: relative;
+  margin: 0 0 5px 0;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  border: none;
+  opacity: 0.5;
 }
+

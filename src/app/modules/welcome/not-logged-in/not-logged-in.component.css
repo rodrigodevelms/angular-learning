@@ -1,0 +1,58 @@
+
+.wlc-nli-grid-title {
+  font-size: 45px;
+  font-family: Muli Helvetica Neue Arial sans-serif !important;
+  line-height: 1.4 !important;
+  text-align: center;
+  margin: 20px 0 50px;
+  color: #2d323e;
+  text-shadow: 1px 1px 4px whitesmoke;
+}
+
+
+.wlc-nli-card-content {
+  height: 300px;
+  width: 80%;
+}
+
+.wlc-nli-card {
+  width: 900px;
+  box-shadow: 0 0 10px #e0e0e0 !important;
+  margin-bottom: 25px;
+}
+
+.wlc-nli-tab-group {
+  width: 920px;
+  align-items: center;
+}
+
+.wlc-nli-image {
+  margin: 35px;
+  width: 65px;
+  height: 105px;
+}
+
+.wlc-nli-text_title {
+  font-size: 29px;
+  font-family: Muli Helvetica Neue Arial sans-serif;
+  line-height: 1.4 !important;
+  letter-spacing: -.1px !important;
+  margin-bottom: 40px;
+}
+
+.wlc-nli-text_paragraph {
+  font-size: 15px;
+  font-family: Muli Helvetica Neue Arial sans-serif;
+  line-height: 1.4 !important;
+  letter-spacing: -.1px !important;
+  text-align: justify;
+}
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  color: white;
+  background-color: #039be5;
+}
+
+/* ink bar */
+::ng-deep .mat-ink-bar {
+  background-color: var(--primary-color, #c8dde7) !important;
+}

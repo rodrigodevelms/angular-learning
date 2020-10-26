@@ -1,6 +1,6 @@
 import {Children} from "./childern";
 
-export interface CardList {
+export interface ListMenu {
   title: string
   children: Children[]
 }

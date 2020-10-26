@@ -4,6 +4,11 @@
   margin: 0;
 }
 
+.nav-tm-mat-toolbar {
+  background: transparent;
+  /*background: url("../../../../assets/background/lines-dots.png") no-repeat center;}*/
+}
+
 /*TOGGLE BUTTON*/
 .mat-icon-button {
   margin-right: 5px;

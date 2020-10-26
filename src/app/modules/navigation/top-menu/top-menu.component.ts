@@ -23,8 +23,8 @@ export class TopMenuComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
-      width: '450px',
-      height: '700ox',
+      width: '400px',
+      height: '740px',
       disableClose: true
     });
 
