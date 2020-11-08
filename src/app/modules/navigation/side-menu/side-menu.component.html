@@ -21,8 +21,8 @@
         <mat-panel-title>{{card.title}}</mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list-item *ngFor="let c of card.children">
-        <mat-icon mat-list-icon fontSet="fab" fontIcon=" fa-accessible-icon"></mat-icon>
-        <div mat-line>{{c.matLine}}</div>
+        <mat-icon mat-list-icon [fontSet]="c.fontSet" [fontIcon]="c.fontIcon"></mat-icon>
+        <div mat-line><a class="nav-sm-mat-line" [routerLink]="['company/new-account']">{{c.matLine}}</a></div>
       </mat-list-item>
     </mat-expansion-panel>
 

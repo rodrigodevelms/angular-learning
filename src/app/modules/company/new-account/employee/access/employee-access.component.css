@@ -1,0 +1,24 @@
+.com-na-form-checkbox {
+  font-size: 20px;
+  margin: 10px 0 25px 0;
+  font-family: Muli Helvetica Neue Arial sans-serif !important;
+}
+
+.com-na-mat-card {
+  box-shadow: 0 0 1px #424853;
+  border: 1px solid transparent;
+}
+
+.com-na-mat-card:hover {
+  border: 1px solid black;
+}
+
+.com-na-mcc {
+  height: 140px;
+}
+
+.com-na-ea-desc {
+  font-size: 17px !important;
+  line-height: 1.25;
+  font-family: Muli Helvetica Neue Arial sans-serif !important;
+}

@@ -13,12 +13,12 @@ import {MatMenuModule} from "@angular/material/menu";
 import {FooterComponent} from './footer/footer.component';
 import {HomeComponent} from './home/home.component';
 import {TopMenuComponent} from './top-menu/top-menu.component';
-import {NavigationRoutesModule} from './navigation.route';
 import {SideMenuComponent} from './side-menu/side-menu.component';
 import {SecurityModule} from "../security/security.module";
 import {NotFoundComponent} from './not-found/not-found.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {WelcomeModule} from "../welcome/welcome.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -41,9 +41,9 @@ import {WelcomeModule} from "../welcome/welcome.module";
     MatMenuModule,
 
     SecurityModule,
-    NavigationRoutesModule,
     MatExpansionModule,
-    WelcomeModule
+    WelcomeModule,
+    RouterModule
   ],
   exports: [
     FooterComponent,

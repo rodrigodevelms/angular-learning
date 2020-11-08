@@ -1,0 +1,48 @@
+.com-na-mat-card {
+  margin-left: 4%;
+  width: 90%;
+}
+
+.com-na-mat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #424853;
+  height: 100px;
+  margin: 10px;
+}
+
+.com-na-form-title {
+  font-size: 35px;
+  color: white;
+  font-family: Muli Helvetica Neue Arial sans-serif !important;
+  margin: 70px;
+}
+
+.com-na-mcc {
+  height: 370px;
+}
+
+.com-na-mcf {
+  margin: 14px;
+}
+
+.com-na-div-btn {
+  margin-top: 50px;
+}
+
+.com-na-btn {
+  color: white;
+  width: 200px !important;
+  min-width: unset !important;
+  background-color: #039be5;
+  margin: 3px;
+}
+
+.com-na-btn:disabled,
+.com-na-btn[disabled] {
+  width: 200px !important;
+  min-width: unset !important;
+  background-color: #c8dde7;
+  color: white;
+}

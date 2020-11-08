@@ -69,9 +69,14 @@ mat-list {
 }
 
 .mat-expansion-panel.mat-expanded {
-  background-color: #575d68;
+  background-color: #424853;
 }
 
 .mat-panel-title{
   color: white;
+}
+
+.nav-sm-mat-line{
+  text-decoration: none;
+  color: #e0e0e0;
 }

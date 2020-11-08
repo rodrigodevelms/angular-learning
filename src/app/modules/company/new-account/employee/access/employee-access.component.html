@@ -1,0 +1,52 @@
+<div [formGroup]="employeeAccessForm">
+  <div fxLayout="row wrap"
+       fxLayout.lt-sm="column"
+       fxLayoutGap="16px"
+       fxLayoutAlign="flex-start">
+
+    <div class="com-na-form-checkbox"
+         fxFlex="100%"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <mat-checkbox class="example-margin"
+                    formControlName="accessCheck"
+
+                    (click)="disabledAccess()"
+                    [checked]="access">O funcionário não possui acesso ao sistema
+      </mat-checkbox>
+    </div>
+
+    <mat-form-field fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    class="com-na-form-field"
+                    appearance="outline">
+      <mat-label>Permissão de Acesso</mat-label>
+      <mat-select required
+                  [(value)]="bodyDescription"
+                  formControlName="accessPermission"
+                  placeholder="Informe o estado civil do funcionário">
+        <mat-option *ngFor="let accessType of accessesTypes" [value]="accessType.value">{{accessType.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div [hidden]="systemAccess"
+         fxFlex="100%"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <mat-card class="com-na-mat-card">
+        <mat-card-header>
+          <mat-card-title>Descrição do acesso</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="com-na-mcc">
+          <div *ngFor="let desc of accessesTypes; let i = index">
+            <p class="com-na-ea-desc"
+               *ngIf="desc.value == bodyDescription"
+               [innerHTML]="accessesTypes[i].description"></p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+</div>

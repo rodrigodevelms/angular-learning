@@ -1,0 +1,192 @@
+<div [formGroup]="employeePersonalForm">
+  <div fxLayout="row wrap"
+       fxLayout.lt-sm="column"
+       fxLayoutGap="16px"
+       fxLayoutAlign="flex-start">
+
+    <mat-form-field class="com-na-form-field"
+                    fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    appearance="outline">
+      <mat-label>Documento</mat-label>
+      <input matInput
+             formControlName="document"
+             placeholder="Informe CPF para pessoa física ou CNPJ para jurídica"
+             type="text"
+             mask="CPF_CNPJ"
+             required>
+      <mat-hint>Somente dítigos</mat-hint>
+    </mat-form-field>
+
+    <div fxFlex="0 1 calc(50% - 16px)"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <div *ngIf="fun_isPhysicalPerson('rg')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Registro Geral</mat-label>
+          <input matInput
+                 formControlName="rg"
+                 placeholder="Informe o número do RG do funcionário"
+                 type="text"
+                 required>
+          <mat-hint>Somente digitos</mat-hint>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fun_isLegalPerson('fancyName')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Nome Fantasia</mat-label>
+          <input matInput
+                 formControlName="fancyName"
+                 placeholder="Informe o nome comercial da empresa"
+                 type="text"
+                 required>
+          <mat-hint>Máximo de 120 caracteres</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxFlex="0 1 calc(50% - 16px)"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <div *ngIf="fun_isPhysicalPerson('name')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput
+                 formControlName="name"
+                 placeholder="Digite o nome completo"
+                 type="text"
+                 required>
+          <mat-hint>Máximo de 120 caracteres</mat-hint>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fun_isLegalPerson('companyName')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Razão Social</mat-label>
+          <input matInput
+                 formControlName="companyName"
+                 placeholder="Informe a razão social da empresa"
+                 type="text"
+                 required>
+          <mat-hint>Máximo de 120 caracteres</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field class="com-na-form-field"
+                    fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput
+             formControlName="email"
+             placeholder="Infome o email do funcionário"
+             type="email"
+             required>
+      <mat-hint>Máximo de 120 caracteres</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="com-na-form-field"
+                    fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput
+             formControlName="phone"
+             placeholder="Informe o telefone do funcionário"
+             type="text"
+             mask="{{phoneMask}}"
+             (ngModelChange)="phoneNumber=$event; fun_phoneMask()"
+             required>
+      <mat-hint>Somente dígitos, com DDD</mat-hint>
+    </mat-form-field>
+
+    <div fxFlex="0 1 calc(50% - 16px)"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <div *ngIf="fun_isPhysicalPerson('birthdate')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput
+                 formControlName="birthdate"
+                 [matDatepicker]="birthdate">
+          <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
+          <mat-datepicker #birthdate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fun_isLegalPerson('openingDate')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Data de Abertura</mat-label>
+          <input matInput
+                 formControlName="openingDate"
+                 [matDatepicker]="openingDate">
+          <mat-datepicker-toggle matSuffix [for]="openingDate"></mat-datepicker-toggle>
+          <mat-datepicker #openingDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxFlex="0 1 calc(50% - 16px)"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <div *ngIf="fun_isPhysicalPerson('gender')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Gênero</mat-label>
+          <mat-select formControlName="gender"
+                      required
+                      placeholder="Informe o gênero do funcionário">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fun_isLegalPerson('type')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="type"
+                      required
+                      placeholder="Informe o tipo da empresa">
+            <mat-option *ngFor="let type of types" [value]="type.value">{{type.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxFlex="0 1 calc(50% - 16px)"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <div *ngIf="fun_isPhysicalPerson('maritalStatus')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Estado Civil</mat-label>
+          <mat-select formControlName="maritalStatus"
+                      required
+                      placeholder="Informe o estado civil do funcionário">
+            <mat-option *ngFor="let ms of maritalStatus" [value]="ms.value">{{ms.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fun_isLegalPerson('lineBusiness')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Ramo de Atuação</mat-label>
+          <mat-select formControlName="lineBusiness"
+                      required
+                      placeholder="Informe o estado civil do funcionário">
+            <mat-option *ngFor="let lb of lineBusiness" [value]="lb.value">{{lb.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </div>
+</div>

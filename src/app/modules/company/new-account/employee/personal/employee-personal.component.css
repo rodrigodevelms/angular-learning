@@ -1,0 +1,33 @@
+.com-na-form-div-for {
+  padding: 0.5%;
+}
+
+.com-na-form-field {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+
+.com-na-form-btn {
+  color: white;
+  width: 200px !important;
+  min-width: unset !important;
+  background-color: #039be5;
+  margin: 3px;
+}
+
+.com-na-form-btn:hover {
+  opacity: 0.8;
+}
+
+.com-na-form {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #e0e0e0;
+  padding: 20px;
+}
+
+.test:hover {
+  color: white;
+  background-color: #039be5 !important;
+}

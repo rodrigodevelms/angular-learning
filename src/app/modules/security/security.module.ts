@@ -7,11 +7,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import { LoginComponent } from './login/login.component';
-import { NewAccountComponent } from './new-account/new-account.component';
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
-  declarations: [LoginComponent, NewAccountComponent],
+  declarations: [
+    LoginComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -23,7 +24,7 @@ import { NewAccountComponent } from './new-account/new-account.component';
     MatFormFieldModule,
     MatInputModule,
   ],
-  exports : [
+  exports: [
     FormsModule
   ]
 })

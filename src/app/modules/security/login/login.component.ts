@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  onNoClick(): void {
+  doCancel(): void {
     this.dialogRef.close();
   }
 
@@ -54,9 +54,5 @@ export class LoginComponent implements OnInit {
       return `O campo ${name} é obrigatório`
     }
     return this.loginForm.get(value).errors ? `O campo ${name} deve conter entre 5 e 120 caracteres` : '';
-  }
-
-  getColor() {
-    return this.loginForm.get('company').errors ? `warn` : '';
   }
 }

@@ -10,3 +10,26 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   overflow: hidden !important;
 }
+
+.mat-form-field {
+  font-size: 17px;
+}
+
+.main-container {
+  margin: 30px;
+}
+
+.mat-step-icon-selected{
+  background-color: #6d727e !important;
+  color: white !important;
+}
+
+.mat-step-header:hover{
+  background-color: #fafafa;
+}
+
+
+.mat-option:hover {
+  color: white;
+  background-color: #039be5 !important;
+}

@@ -1,7 +1,7 @@
 export interface Children {
   icon: string
-  imageSet: string,
-  imageIcon: string,
+  fontSet: string,
+  fontIcon: string,
   anchor: string
   matLine: string
 }

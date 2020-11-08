@@ -1,0 +1,113 @@
+<div class="main-container">
+  <mat-card class="com-na-mat-card">
+
+    <mat-card-header class="com-na-mat-card-header">
+      <mat-card-title class="com-na-form-title">
+        <p>CADASTRO DE FUNCIONÁRIO</p>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-horizontal-stepper [linear]="isLinear" class="com-na-mhs" style="margin: 10px;">
+
+      <!--PERSONAL INFORMATION-->
+      <mat-step [stepControl]="employeePersonalForm">
+        <form [formGroup]="employeePersonalForm">
+          <mat-card-content class="com-na-mcc">
+            <ng-template matStepLabel><p>Dados Pessoais</p></ng-template>
+            <app-employee-personal [employeePersonalForm]="employeePersonalForm"></app-employee-personal>
+          </mat-card-content>
+          <mat-card-footer class="com-na-mcf">
+            <div align="right" class="com-na-div-btn">
+              <button class="com-na-btn"
+                      mat-button
+                      [disabled]="!employeePersonalForm.valid"
+                      matStepperNext>Próximo
+              </button>
+            </div>
+          </mat-card-footer>
+        </form>
+      </mat-step>
+      <!--END-->
+
+      <!--ADDRESS INFORMATION-->
+      <mat-step [stepControl]="employeeAddressForm" label="Endereço">
+        <form [formGroup]="employeeAddressForm">
+          <mat-card-content class="com-na-mcc">
+            <app-employee-address [employeeAddressForm]="employeeAddressForm"></app-employee-address>
+          </mat-card-content>
+          <mat-card-footer class="com-na-mcf">
+            <div align="right" class="com-na-div-btn">
+              <button class="com-na-btn"
+                      mat-button
+                      matStepperPrevious>Anterior
+              </button>
+              <button class="com-na-btn"
+                      mat-button
+                      [disabled]="!employeeAddressForm.valid"
+                      matStepperNext>Próximo
+              </button>
+            </div>
+          </mat-card-footer>
+        </form>
+      </mat-step>
+      <!--END-->
+
+      <!--PROFESSIONAL INFORMATION-->
+      <mat-step [stepControl]="employeeProfessionalForm">
+        <form [formGroup]="employeeProfessionalForm">
+          <mat-card-content class="com-na-mcc">
+            <ng-template matStepLabel *ngIf="fun_isPhysicalPerson()">Dados Profissionais</ng-template>
+            <ng-template matStepLabel *ngIf="fun_isLegalPerson()">Dados Contratuais</ng-template>
+            <app-employee-professional [employeeProfessionalForm]="employeeProfessionalForm"
+                                       [physicalPerson]="physicalPerson"
+                                       [legalPerson]="legalPerson"
+                                       (vtEmitter)="fun_transportationVoucherStatus()" (vrEmitter)="fun_foodVoucherStatus()"></app-employee-professional>
+          </mat-card-content>
+          <mat-card-footer class="com-na-mcf">
+            <div align="right" class="com-na-div-btn">
+              <button class="com-na-btn"
+                      mat-button
+                      matStepperPrevious>Anterior
+              </button>
+              <button class="com-na-btn"
+                      mat-button
+                      [disabled]="!employeeProfessionalForm.valid"
+                      matStepperNext>Próximo
+              </button>
+            </div>
+          </mat-card-footer>
+        </form>
+      </mat-step>
+      <!--END-->
+
+      <!--ACCESS INFORMATION-->
+      <mat-step [stepControl]="employeeAccessForm">
+        <form [formGroup]="employeeAccessForm">
+          <mat-card-content class="com-na-mcc">
+            <ng-template matStepLabel>Dados de Acesso</ng-template>
+            <app-employee-access [employeeAccessForm]="employeeAccessForm"
+                                 [systemAccess]="roleAccess"
+                                 (accessEmitter)="fun_roleAccessStatus()"></app-employee-access>
+          </mat-card-content>
+          <mat-card-footer class="com-na-mcf">
+            <div align="right">
+              <button class="com-na-btn"
+                      mat-button
+                      matStepperPrevious>Anterior
+              </button>
+              <button class="com-na-btn"
+                      mat-button
+                      [disabled]="!fun_steppeFormValidation()"
+                      (click)="fun_save()"
+                      matStepperNext>Salvar
+              </button>
+            </div>
+          </mat-card-footer>
+        </form>
+      </mat-step>
+      <!--END-->
+
+    </mat-horizontal-stepper>
+
+  </mat-card>
+</div>

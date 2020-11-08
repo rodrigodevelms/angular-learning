@@ -1,0 +1,155 @@
+<div [formGroup]="employeeProfessionalForm">
+  <div fxLayout="row wrap"
+       fxLayout.lt-sm="column"
+       fxLayoutGap="16px"
+       fxLayoutAlign="flex-start">
+
+    <div fxFlex="0 1 calc(50% - 16px)"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
+      <div *ngIf="fun_isPhysicalPerson('position')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Cargo</mat-label>
+          <input matInput
+                 placeholder="Informe o cargo a ser ocupado"
+                 formControlName="position"
+                 type="text"
+                 required>
+          <mat-hint>Máximo de 120 caracteres</mat-hint>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fun_isLegalPerson('serviceContract')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Serviço Contratado</mat-label>
+          <input matInput
+                 placeholder="Informe qual o serviço contratado"
+                 formControlName="serviceContract"
+                 type="text"
+                 required>
+          <mat-hint>Máximo de 120 caracteres</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div  fxFlex="0 1 calc(50% - 16px)"
+          fxFlex.lt-md="0 1 calc(50% - 16px)"
+          fxFlex.lt-sm="100%">
+      <div *ngIf="fun_isPhysicalPerson('salary')">
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Salário</mat-label>
+          <input matInput
+                 placeholder="Infome o salário"
+                 formControlName="salary"
+                 type="text"
+                 required>
+          <mat-hint>Em Real R$</mat-hint>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fun_isLegalPerson('contractValue')">
+      <mat-form-field class="com-na-form-field"
+                      appearance="outline">
+        <mat-label>Valor do Contrato</mat-label>
+        <input matInput
+               placeholder="Infome o valor do contado"
+               formControlName="contractValue"
+               type="text"
+               required>
+        <mat-hint>Em Real R$</mat-hint>
+      </mat-form-field>
+    </div>
+    </div>
+
+    <mat-form-field fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    class="com-na-form-field"
+                    appearance="outline">
+      <mat-label>Data de contratação</mat-label>
+      <input matInput [matDatepicker]="birthdate"
+             formControlName="hiringDate">
+      <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
+      <mat-datepicker #birthdate></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="com-na-form-field"
+                    fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    appearance="outline">
+      <mat-label>Horas Semanais</mat-label>
+      <input matInput
+             placeholder="Informe a quantidade de horas semanais contratada"
+             formControlName="weekHours"
+             type="text"
+             required>
+      <mat-hint>Somente digitos</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    class="com-na-form-field"
+                    appearance="outline">
+      <mat-label>Vínculo Empregatício</mat-label>
+      <mat-select required
+                  formControlName="bond"
+                  placeholder="Informe o estado civil do funcionário">
+        <mat-option *ngFor="let bond of bonds" [value]="bond.value">{{bond.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    class="com-na-form-field"
+                    appearance="outline">
+      <mat-label>Período de Trabalho</mat-label>
+      <mat-select required
+                  formControlName="workTime"
+                  placeholder="Informe o estado civil do funcionário">
+        <mat-option *ngFor="let wk of workTime" [value]="wk.value">{{wk.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="com-na-form-field"
+                    fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    appearance="outline">
+      <mat-label>Vale Refeição</mat-label>
+      <input matInput
+             placeholder="Informe o valor do vale refeição"
+             type="text"
+             formControlName="vr">
+      <mat-hint>
+        <mat-checkbox class="example-margin"
+                      formControlName="vrCheck"
+                      (click)="fun_foodVoucherStatus()"
+                      [checked]="foodVoucher">Não possui o benefício do vale refeição
+        </mat-checkbox>
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="com-na-form-field"
+                    fxFlex="0 1 calc(50% - 16px)"
+                    fxFlex.lt-md="0 1 calc(50% - 16px)"
+                    fxFlex.lt-sm="100%"
+                    appearance="outline">
+      <mat-label>Vale Transporte</mat-label>
+      <input matInput
+             placeholder="Informe o valor do vale transporte"
+             type="text"
+             formControlName="vt">
+      <mat-hint>
+        <mat-checkbox class="example-margin"
+                      formControlName="vtCheck"
+                      (click)="fun_transportationVoucherStatus()"
+                      [checked]="transportVoucher">Não possui o benefício do vale transporte
+        </mat-checkbox>
+      </mat-hint>
+    </mat-form-field>
+  </div>
+</div>

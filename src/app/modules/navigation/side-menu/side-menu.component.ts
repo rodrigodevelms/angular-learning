@@ -28,40 +28,40 @@ export class SideMenuComponent implements OnInit {
       photo: "../../../assets/photos/rodrigo.jpg",
       cards: [
         {
-          title: "One",
+          title: "Funcionários",
           children: [
             {
               icon: "500px",
               anchor: "#",
-              imageSet: "",
-              imageIcon: "",
-              matLine: "sub-one-one"
+              fontSet: "fas",
+              fontIcon: "fa-user-circle",
+              matLine: "Novo cadastro"
             },
             {
               icon: "accessible-icon",
               anchor: "#",
-              imageSet: "",
-              imageIcon: "",
-              matLine: "sub-one-two"
-            }
+              fontSet: "fas",
+              fontIcon: "fa-search",
+              matLine: "Localizar"
+            },
           ]
         },
         {
-          title: "Two",
+          title: "Empresa",
           children: [
             {
               icon: "amazon",
               anchor: "#",
-              imageSet: "",
-              imageIcon: "",
-              matLine: "sub-two-one"
+              fontSet: "fas",
+              fontIcon: "fa-industry",
+              matLine: "Dados"
             },
             {
               icon: "amazon-pay",
               anchor: "#",
-              imageSet: "",
-              imageIcon: "",
-              matLine: "sub-two-two"
+              fontSet: "fas",
+              fontIcon: "fa-building",
+              matLine: "Filiais"
             }
           ]
         }
