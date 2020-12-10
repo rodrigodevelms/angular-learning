@@ -1,13 +1,16 @@
-<mat-toolbar class="nav-tm-mat-toolbar">
-  <div>
-    <button mat-icon-button (click)="onToggleSidenav()">
+<mat-toolbar class="nav-tm-mat-toolbar" [ngSwitch]="isLoggedIn">
+  <div *ngSwitchCase="true">
+    <button mat-icon-button (click)="fun_onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
-    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-      <li>
-        <button mat-mini-fab (click)="openDialog()"><mat-icon fontSet="fa" fontIcon="fa-sign-in-alt"></mat-icon></button>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items" >
+      <li *ngSwitchCase="false">
+        <button mat-mini-fab (click)="fun_openDialog()"><mat-icon fontSet="fas" fontIcon="fa-door-open"></mat-icon></button>
+      </li>
+      <li *ngSwitchCase="true">
+        <button mat-mini-fab (click)="fun_logout()"><mat-icon fontSet="fas" fontIcon="fa-door-closed"></mat-icon></button>
       </li>
     </ul>
   </div>

@@ -11,8 +11,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
+
 
 import {CompanyRoutes} from "./company.routes";
 import {MainPageComponent} from './new-account/employee/main-page/main-page.component';
@@ -23,6 +24,9 @@ import {EmployeeAccessComponent} from './new-account/employee/access/employee-ac
 import {NgxMaskModule} from "ngx-mask";
 
 import {EmployeeService} from "./new-account/employee/service/employee.service";
+import {NgxCurrencyModule} from "ngx-currency";
+
+import {CommonsModule} from "../../commons/commons.module";
 
 @NgModule({
   declarations: [
@@ -51,9 +55,13 @@ import {EmployeeService} from "./new-account/employee/service/employee.service";
     FormsModule,
     NgxMaskModule.forRoot(),
     MatSelectModule,
+    NgxCurrencyModule,
+
+    CommonsModule
   ],
   providers: [
-    EmployeeService
+    EmployeeService,
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
   ]
 })
 export class CompanyModule {

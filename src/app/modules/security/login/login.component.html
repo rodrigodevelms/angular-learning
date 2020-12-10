@@ -2,7 +2,7 @@
   <img class="sec-log-img-logo" src=".,/../../assets/company/rj_logo.png">
   <p mat-dialog-title class="sec-log-title">ENTRAR NA SUA CONTA</p>
 </div>
-<form (ngSubmit)="doLogin()" [formGroup]="loginForm">
+<form [formGroup]="loginForm">
   <mat-dialog-content class="sec-log-dialog-content">
 
     <mat-form-field appearance="outline">
@@ -10,33 +10,34 @@
       <input matInput placeholder="Informe o usuário" id="username" type="text"
              formControlName="username">
       <mat-icon matSuffix fontSet="fa" fontIcon="fa-user"></mat-icon>
-      <mat-error *ngIf="loginForm.get('username').invalid">{{validateField('username', 'usuário')}}</mat-error>
+      <mat-error *ngIf="loginForm.get('username').invalid">{{fun_validateField('username', 'usuário')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label for="password">Senha</mat-label>
       <input matInput placeholder="Digite sua senha" id="password" type="password"
              formControlName="password">
-      <mat-icon matSuffix fontSet="fa" fontIcon="fa-key" ></mat-icon>
-      <mat-error *ngIf="loginForm.get('password').invalid">{{validateField('password', 'senha')}}</mat-error>
+      <mat-icon matSuffix fontSet="fa" fontIcon="fa-key"></mat-icon>
+      <mat-error *ngIf="loginForm.get('password').invalid">{{fun_validateField('password', 'senha')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label for="company">Empresa</mat-label>
       <input matInput placeholder="Escolha a empresa" id="company" type="text"
              formControlName="company">
-      <mat-icon matSuffix fontSet="fa" fontIcon="fa-building" ></mat-icon>
-      <mat-error *ngIf="loginForm.get('company').invalid">{{validateField('company', 'empresa')}}</mat-error>
+      <mat-icon matSuffix fontSet="fa" fontIcon="fa-building"></mat-icon>
+      <mat-error *ngIf="loginForm.get('company').invalid">{{fun_validateField('company', 'empresa')}}</mat-error>
     </mat-form-field>
 
   </mat-dialog-content>
   <div mat-dialog-actions align="center">
-    <button mat-button class="sec-log-btn" id="login-submit" type="submit"
-            [disabled]="!loginForm.valid">Entrar
+    <button mat-button class="sec-log-btn" id="login-submit"
+            [disabled]="!loginForm.valid"
+            (click)="fun_login()">Entrar
     </button>
   </div>
   <div mat-dialog-actions align="center">
-    <button mat-button (click)="doCancel()" class="sec-log-btn">Cancelar</button>
+    <button mat-button (click)="fun_cancel()" class="sec-log-btn">Cancelar</button>
   </div>
   <div mat-dialog-actions align="center">
     <a href="#" class="sec-log-forgot-password">Esqueceu a senha?</a>

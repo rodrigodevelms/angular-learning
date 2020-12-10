@@ -33,9 +33,9 @@
       </div>
     </div>
 
-    <div  fxFlex="0 1 calc(50% - 16px)"
-          fxFlex.lt-md="0 1 calc(50% - 16px)"
-          fxFlex.lt-sm="100%">
+    <div fxFlex="0 1 calc(50% - 16px)"
+         fxFlex.lt-md="0 1 calc(50% - 16px)"
+         fxFlex.lt-sm="100%">
       <div *ngIf="fun_isPhysicalPerson('salary')">
         <mat-form-field class="com-na-form-field"
                         appearance="outline">
@@ -44,22 +44,26 @@
                  placeholder="Infome o salário"
                  formControlName="salary"
                  type="text"
+                 currencyMask
+                 [options]="currencyMask"
                  required>
           <mat-hint>Em Real R$</mat-hint>
         </mat-form-field>
       </div>
       <div *ngIf="fun_isLegalPerson('contractValue')">
-      <mat-form-field class="com-na-form-field"
-                      appearance="outline">
-        <mat-label>Valor do Contrato</mat-label>
-        <input matInput
-               placeholder="Infome o valor do contado"
-               formControlName="contractValue"
-               type="text"
-               required>
-        <mat-hint>Em Real R$</mat-hint>
-      </mat-form-field>
-    </div>
+        <mat-form-field class="com-na-form-field"
+                        appearance="outline">
+          <mat-label>Valor do Contrato</mat-label>
+          <input matInput
+                 placeholder="Infome o valor do contado"
+                 formControlName="contractValue"
+                 type="text"
+                 currencyMask
+                 [options]="currencyMask"
+                 required>
+          <mat-hint>Em Real R$</mat-hint>
+        </mat-form-field>
+      </div>
     </div>
 
     <mat-form-field fxFlex="0 1 calc(50% - 16px)"
@@ -68,10 +72,12 @@
                     class="com-na-form-field"
                     appearance="outline">
       <mat-label>Data de contratação</mat-label>
-      <input matInput [matDatepicker]="birthdate"
+      <input matInput
+             [max]="fun_validateDate()"
+             [matDatepicker]="hiringDate"
              formControlName="hiringDate">
-      <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
-      <mat-datepicker #birthdate></mat-datepicker>
+      <mat-datepicker-toggle matSuffix [for]="hiringDate"></mat-datepicker-toggle>
+      <mat-datepicker #hiringDate></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="com-na-form-field"
@@ -84,8 +90,10 @@
              placeholder="Informe a quantidade de horas semanais contratada"
              formControlName="weekHours"
              type="text"
+             mask="00:00"
+             [patterns]="hourMask"
              required>
-      <mat-hint>Somente digitos</mat-hint>
+      <mat-hint>Horas e minutos</mat-hint>
     </mat-form-field>
 
     <mat-form-field fxFlex="0 1 calc(50% - 16px)"
@@ -123,10 +131,12 @@
       <input matInput
              placeholder="Informe o valor do vale refeição"
              type="text"
-             formControlName="vr">
+             currencyMask
+             [options]="currencyMask"
+             formControlName="foodVoucher">
       <mat-hint>
         <mat-checkbox class="example-margin"
-                      formControlName="vrCheck"
+                      formControlName="foodVoucherStatus"
                       (click)="fun_foodVoucherStatus()"
                       [checked]="foodVoucher">Não possui o benefício do vale refeição
         </mat-checkbox>
@@ -140,12 +150,14 @@
                     appearance="outline">
       <mat-label>Vale Transporte</mat-label>
       <input matInput
+             currencyMask
+             [options]="currencyMask"
              placeholder="Informe o valor do vale transporte"
              type="text"
-             formControlName="vt">
+             formControlName="transportationVoucher">
       <mat-hint>
         <mat-checkbox class="example-margin"
-                      formControlName="vtCheck"
+                      formControlName="transportationVoucherStatus"
                       (click)="fun_transportationVoucherStatus()"
                       [checked]="transportVoucher">Não possui o benefício do vale transporte
         </mat-checkbox>

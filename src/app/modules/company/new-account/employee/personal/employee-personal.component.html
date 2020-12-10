@@ -116,7 +116,9 @@
           <mat-label>Data de Nascimento</mat-label>
           <input matInput
                  formControlName="birthdate"
-                 [matDatepicker]="birthdate">
+                 [matDatepicker]="birthdate"
+                 [max]="fun_validateDate(18)">
+          <mat-hint>Idade mínima: 18 anos</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
           <mat-datepicker #birthdate></mat-datepicker>
         </mat-form-field>
@@ -126,6 +128,7 @@
                         appearance="outline">
           <mat-label>Data de Abertura</mat-label>
           <input matInput
+                 [max]="fun_validateDate(0)"
                  formControlName="openingDate"
                  [matDatepicker]="openingDate">
           <mat-datepicker-toggle matSuffix [for]="openingDate"></mat-datepicker-toggle>
@@ -148,14 +151,14 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div *ngIf="fun_isLegalPerson('type')">
+      <div *ngIf="fun_isLegalPerson('companyType')">
         <mat-form-field class="com-na-form-field"
                         appearance="outline">
           <mat-label>Tipo</mat-label>
-          <mat-select formControlName="type"
+          <mat-select formControlName="companyType"
                       required
                       placeholder="Informe o tipo da empresa">
-            <mat-option *ngFor="let type of types" [value]="type.value">{{type.name}}</mat-option>
+            <mat-option *ngFor="let type of companyTypes" [value]="type.value">{{type.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

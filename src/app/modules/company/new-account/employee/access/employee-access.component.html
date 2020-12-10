@@ -9,9 +9,9 @@
          fxFlex.lt-md="0 1 calc(50% - 16px)"
          fxFlex.lt-sm="100%">
       <mat-checkbox class="example-margin"
-                    formControlName="accessCheck"
+                    formControlName="accessRoleStatus"
 
-                    (click)="disabledAccess()"
+                    (click)="fun_changeAccessRoleStatus()"
                     [checked]="access">O funcionário não possui acesso ao sistema
       </mat-checkbox>
     </div>
@@ -24,7 +24,7 @@
       <mat-label>Permissão de Acesso</mat-label>
       <mat-select required
                   [(value)]="bodyDescription"
-                  formControlName="accessPermission"
+                  formControlName="accessRole"
                   placeholder="Informe o estado civil do funcionário">
         <mat-option *ngFor="let accessType of accessesTypes" [value]="accessType.value">{{accessType.name}}</mat-option>
       </mat-select>

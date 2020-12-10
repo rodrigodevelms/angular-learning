@@ -62,3 +62,9 @@
 .sec-log-forgot-password:active {
   color: red;
 }
+
+::ng-deep .blue-snackbar {
+  margin: 80px 20px !important;
+  color: white;
+  background-color: #ef5350;
+}

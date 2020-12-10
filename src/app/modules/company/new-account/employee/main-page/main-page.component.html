@@ -7,7 +7,7 @@
       </mat-card-title>
     </mat-card-header>
 
-    <mat-horizontal-stepper [linear]="isLinear" class="com-na-mhs" style="margin: 10px;">
+    <mat-horizontal-stepper linear="false" class="com-na-mhs" style="margin: 10px;">
 
       <!--PERSONAL INFORMATION-->
       <mat-step [stepControl]="employeePersonalForm">
@@ -86,7 +86,7 @@
           <mat-card-content class="com-na-mcc">
             <ng-template matStepLabel>Dados de Acesso</ng-template>
             <app-employee-access [employeeAccessForm]="employeeAccessForm"
-                                 [systemAccess]="roleAccess"
+                                 [systemAccess]="accessRole"
                                  (accessEmitter)="fun_roleAccessStatus()"></app-employee-access>
           </mat-card-content>
           <mat-card-footer class="com-na-mcf">

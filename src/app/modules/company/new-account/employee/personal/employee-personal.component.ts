@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Select} from "../../../../../commons/model/select";
+import * as moment from "moment/moment";
+
 
 @Component({
   selector: 'app-employee-personal',
@@ -21,80 +23,80 @@ export class EmployeePersonalComponent implements OnInit {
 
   genders: Select[] = [
     {
-      value: 'notInformed',
+      value: 'NotInformed',
       name: "Não informado"
     },
     {
-      value: 'male',
+      value: 'Male',
       name: "Masculino"
     },
     {
-      value: 'female',
+      value: 'Female',
       name: "Feminino"
     },
     {
-      value: 'other',
+      value: 'Other',
       name: "Outro"
     }
   ]
 
   maritalStatus: Select[] = [
     {
-      value: 'notInformed',
+      value: 'NotInformed',
       name: "Não informado"
     },
     {
-      value: 'single',
+      value: 'Single',
       name: "Solteiro"
     },
     {
-      value: 'married',
+      value: 'Married',
       name: "Casado"
     },
     {
-      value: 'divorced',
+      value: 'Divorced',
       name: "Divorciado"
     },
     {
-      value: 'widower',
+      value: 'Widower',
       name: "Viúvo"
     },
     {
-      value: 'stableUnion',
+      value: 'StableUnion',
       name: "União Estável"
     }
   ];
 
-  types: Select[] = [
+  companyTypes: Select[] = [
     {
-      value: 'parent',
+      value: 'Parent',
       name: "Matriz"
     },
     {
-      value: 'subsidiary',
+      value: 'Subsidiary',
       name: "Filial"
     },
   ];
 
   lineBusiness: Select[] = [
     {
-      value: 'footwear',
+      value: 'Footwear',
       name: "Calçados"
     },
     {
-      value: 'clothing',
+      value: 'Clothing',
       name: "Vestuário"
     },
     {
-      value: "medicines",
+      value: "Medicines",
       name: "Medicamentos"
     },
     {
-      value: "marketplace",
+      value: "Marketplace",
       name: "Mercado em Geral"
     },
     {
-      value: "other",
+      value: "Other",
       name: "Outros"
     }
   ];
@@ -136,6 +138,11 @@ export class EmployeePersonalComponent implements OnInit {
       this.employeePersonalForm.get(value).disable();
       return false;
     }
+  }
+
+  fun_validateDate(year: number): Date {
+    let todayDate: Date = new Date();
+    return moment(todayDate).subtract(year, 'year').toDate();
   }
 
 }

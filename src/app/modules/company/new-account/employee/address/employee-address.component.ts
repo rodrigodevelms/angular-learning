@@ -8,7 +8,11 @@ import {FormGroup} from "@angular/forms";
 })
 export class EmployeeAddressComponent implements OnInit {
 
+  // VARIABLES ******************************************
+
   @Input() employeeAddressForm: FormGroup;
+
+  // FUNCTIONS ******************************************
 
   constructor() {
   }

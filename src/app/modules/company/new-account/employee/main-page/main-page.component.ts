@@ -1,6 +1,15 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EmployeeService} from "../service/employee.service";
+import {LegalPerson} from "./model/legal-person";
+import {PhysicalPerson} from "./model/physical-person";
+import {Address} from "./model/address";
+import {ProfessionalData} from "./model/professional-data";
+import {ContractualData} from "./model/contractual-data";
+import {Employee} from "./model/employee";
+import {BaseModel} from "../../../../../commons/model/base-model";
+import {User} from "../../../../security/login/models/user";
+import {Credential} from "../../../../security/login/models/credential";
 
 @Component({
   selector: 'app-main-page',
@@ -14,14 +23,29 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
   employeePersonalForm: FormGroup;
   employeeAddressForm: FormGroup;
   employeeProfessionalForm: FormGroup;
-  employeeAccessForm: FormGroup
+  employeeAccessForm: FormGroup;
 
-  isLinear = false;
-  transportationVoucher: boolean = false;
   foodVoucher: boolean = false;
-  roleAccess: boolean = false;
+  transportationVoucher: boolean = false;
+  accessRole: boolean = false;
   physicalPerson: boolean = true;
   legalPerson: boolean = false;
+
+  // INTERFACES *****************
+
+  iPhysicalPerson: PhysicalPerson;
+  iLegalPerson: LegalPerson;
+  iAddress: Address;
+  iProfessionalData: ProfessionalData;
+  iContractData: ContractualData;
+
+
+  // OBJECT  ***********************
+
+  employee: Employee;
+  user: User;
+
+  // FUNCTIONS *************************************************************
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,8 +53,6 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
     private cdr: ChangeDetectorRef,
   ) {
   };
-
-  // FUNCTIONS *************************************************************
 
   ngAfterViewChecked(): void {
     this.cdr.detectChanges();
@@ -89,7 +111,7 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
         '',
         Validators.required,
       ],
-      type: [
+      companyType: [
         '',
         Validators.required,
       ],
@@ -146,6 +168,7 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
       ]
     });
 
+
     this.employeeProfessionalForm = this.formBuilder.group({
       position: [
         '',
@@ -160,20 +183,26 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
           Validators.maxLength(120)]
       ],
       salary: [
-        '', Validators.required,
+        '', [
+          Validators.required,
+          Validators.pattern(/^(\d)*\.[0-9]{2}$/)
+        ]
       ],
       contractValue: [
-        '', Validators.required
+        '', [
+          Validators.required,
+          Validators.pattern(/^(\d)*\.(\d){2}$/)
+        ]
       ],
       hiringDate: [
         '',
         Validators.required
       ],
       weekHours: [
-        '',
-        [Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(120)]
+        '', [
+          Validators.required,
+          Validators.pattern(/^(\d){4}$/)
+        ]
       ],
       bond: [
         '',
@@ -183,28 +212,32 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
         '',
         Validators.required
       ],
-      vr: [
-        '',
-        Validators.required
+      foodVoucher: [
+        '', [
+          Validators.required,
+          Validators.pattern(/^(\d)*\.(\d){2}$/)
+        ]
       ],
-      vt: [
-        '',
-        Validators.required
+      transportationVoucher: [
+        '', [
+          Validators.required,
+          Validators.pattern(/^(\d)*\.(\d){2}$/)
+        ]
       ],
-      vrCheck: [
+      foodVoucherStatus: [
         this.foodVoucher
       ],
-      vtCheck: [
+      transportationVoucherStatus: [
         this.transportationVoucher
       ]
     });
 
     this.employeeAccessForm = this.formBuilder.group({
-      accessPermission: [
+      accessRole: [
         '', Validators.required
       ],
-      accessCheck: [
-        this.roleAccess
+      accessRoleStatus: [
+        this.accessRole
       ]
     });
 
@@ -212,21 +245,21 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
 
   fun_transportationVoucherStatus() {
     this.transportationVoucher = !this.transportationVoucher;
-    this.transportationVoucher ? this.employeeProfessionalForm.get('vt').disable() : this.employeeProfessionalForm.get('vt').enable();
+    this.transportationVoucher ? this.employeeProfessionalForm.get('transportationVoucher').disable() : this.employeeProfessionalForm.get('transportationVoucher').enable();
   };
 
   fun_foodVoucherStatus() {
     this.foodVoucher = !this.foodVoucher;
-    this.foodVoucher ? this.employeeProfessionalForm.get('vr').disable() : this.employeeProfessionalForm.get('vr').enable();
+    this.foodVoucher ? this.employeeProfessionalForm.get('foodVoucher').disable() : this.employeeProfessionalForm.get('foodVoucher').enable();
   };
 
   fun_roleAccessStatus() {
-    this.roleAccess = !this.roleAccess;
-    this.roleAccess ? this.employeeAccessForm.get('accessPermission').disable() : this.employeeAccessForm.get('accessPermission').enable();
+    this.accessRole = !this.accessRole;
+    this.accessRole ? this.employeeAccessForm.get('accessRole').disable() : this.employeeAccessForm.get('accessRole').enable();
   };
 
   fun_isPhysicalPerson(): boolean {
-    if (this.employeePersonalForm.get('document').value.length <= 11) {
+    if (this.fun_verifyPhysicalPerson()) {
       this.physicalPerson = true;
       return true;
     } else {
@@ -235,8 +268,9 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
     }
   }
 
+
   fun_isLegalPerson(): boolean {
-    if (this.employeePersonalForm.get('document').value.length > 11) {
+    if (this.fun_verifyLegalPerson()) {
       this.legalPerson = true;
       return true;
     } else {
@@ -256,59 +290,69 @@ export class MainPageComponent implements OnInit, AfterViewChecked {
 
   fun_save() {
     if (this.fun_steppeFormValidation()) {
-      console.log("valid")
+      this.fun_assignEmployeeObject();
+      this.service.insertEmployee(this.employee, 'BR').subscribe();
     } else {
       console.log("invalid")
     }
   }
 
-  // STEPS BEGIN ***********
-  // physicalPerson1: PhysicalPerson;
-  // legalPersons: LegalPerson;
-  //
-  // stepOne() {
-  //   if (this.employeePersonalForm.get('document').value.length <= 11) {
-  //     this.physicalPerson1 = Object.assign(
-  //       {},
-  //       this.physicalPerson1, this.employeePersonalForm.value
-  //     )
-  //     console.log(this.physicalPerson1);
-  //   } else {
-  //     this.legalPersons = Object.assign(
-  //       {},
-  //       this.legalPersons, this.employeePersonalForm.value
-  //     )
-  //     console.log(this.legalPersons);
-  //   }
-  // };
-  //
-  // employeeAddress: Address;
-  //
-  // stepTwo() {
-  //   this.employeeAddress = Object.assign(
-  //     {},
-  //     this.employeeAddress, this.employeeAddressForm.value
-  //   )
-  // };
-  //
-  // employeeProfessional: Professional;
-  //
-  // stepThree() {
-  //   this.physicalPerson1 = Object.assign(
-  //     {},
-  //     this.employeeProfessional, this.employeeProfessionalForm.value
-  //   )
-  // };
+  // PRIVATE FUNCTIONS  ************************
 
-  // employeeAccess: Access
-  //
-  // stepFour() {
-  //   this.employeeAccess = Object.assign(
-  //     {},
-  //     this.employeeAccess, this.employeeAccessForm.value
-  //   )
-  // };
+  private fun_verifyPhysicalPerson(): boolean {
+    return this.employeePersonalForm.get('document').value.length <= 11;
+  };
 
-  // STEPS END **********
+  private fun_verifyLegalPerson(): boolean {
+    return this.employeePersonalForm.get('document').value.length > 11;
+  };
 
+  private fun_assignEmployeeObject() {
+    this.fun_assignAddress();
+    this.fun_assignUser();
+    if (this.fun_verifyPhysicalPerson()) this.fun_verifyPhysicalPerson();
+    if (this.fun_verifyLegalPerson()) this.fun_assignLegalPerson();
+  }
+
+  private fun_assignAddress() {
+    this.iAddress = Object.assign({}, this.iAddress, this.employeeAddressForm.value);
+  }
+
+  private fun_assignUser() {
+    this.user = new User(
+      new BaseModel(null, true),
+      new Credential(
+        this.employeeAccessForm.value.username,
+        this.employeeAccessForm.value.password
+      )
+    )
+  }
+
+  private fun_assignLegalPerson() {
+    this.iLegalPerson = Object.assign({}, this.iLegalPerson, this.employeePersonalForm.value);
+    this.iContractData = Object.assign({}, this.iContractData, this.employeeProfessionalForm.value);
+    this.employee = new Employee(
+      new BaseModel(null, true),
+      this.user,
+      this.iAddress,
+      null,
+      this.iLegalPerson,
+      null,
+      this.iContractData
+    )
+  }
+
+  private fun_assignPhysicalPerson() {
+    this.iPhysicalPerson = Object.assign({}, this.iPhysicalPerson, this.employeePersonalForm.value);
+    this.iProfessionalData = Object.assign({}, this.iProfessionalData, this.employeeProfessionalForm.value);
+    this.employee = new Employee(
+      new BaseModel(null, true),
+      this.user,
+      this.iAddress,
+      this.iPhysicalPerson,
+      null,
+      this.iProfessionalData,
+      null
+    )
+  }
 }

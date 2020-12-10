@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EmploymentBond} from "./models/employment-bond";
-import {WorkTime} from "./models/work-time";
 import {FormGroup} from "@angular/forms";
+import {Select} from "../../../../../commons/model/select";
+import {MaskValidationService} from "../../../../../commons/validations/mask-validation.service";
 
 @Component({
   selector: 'app-employee-professional',
@@ -21,31 +21,36 @@ export class EmployeeProfessionalComponent implements OnInit {
 
   transportVoucher: boolean = false;
   foodVoucher: boolean = false;
-  bonds: EmploymentBond[] = [
+  bonds: Select[] = [
     {
-      value: 'clt',
+      value: 'CLT',
       name: "CLT"
     },
     {
-      value: 'contract',
+      value: 'Contract',
       name: "Contrato"
     }
   ]
 
-  workTime: WorkTime[] = [
+  workTime: Select[] = [
     {
-      value: 'daytime',
+      value: 'Daytime',
       name: "Diurno"
     },
     {
-      value: 'nocturnal',
+      value: 'Nocturnal',
       name: "Noturno"
     }
   ];
 
+  hourMask = this.maskValidation.fun_hourMaskPattern();
+  currencyMask = this.maskValidation.fun_currencyRealPattern();
+
   // FUNCTIONS ******************************************************
 
-  constructor() {
+  constructor(
+    private maskValidation:  MaskValidationService
+  ) {
   }
 
   ngOnInit(): void {
@@ -77,5 +82,9 @@ export class EmployeeProfessionalComponent implements OnInit {
       this.employeeProfessionalForm.get(value).disable();
       return false;
     }
+  }
+
+  fun_validateDate(): Date {
+    return new Date();
   }
 }

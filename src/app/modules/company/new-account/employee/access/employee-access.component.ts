@@ -9,23 +9,19 @@ import {Select} from "../../../../../commons/model/select";
 })
 export class EmployeeAccessComponent implements OnInit {
 
-  @Input() employeeAccessForm: FormGroup;
+  // VARIABLES ******************************************
+
   @Input() systemAccess: boolean;
+  @Input() employeeAccessForm: FormGroup;
 
   @Output() accessEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   bodyDescription: string;
   access: boolean = false;
 
   accessesTypes: Select[] = [
     {
-      value: "owner",
+      value: "Owner",
       name: "Proprietário",
       description: `O Proprietário tem total acesso ao sistema. Podendo interagir em todas as áreas como:
       <br> área do contador: O proprietário pode ter acesso a todas as funionalidades que o <strong>contador</strong> possui.
@@ -33,24 +29,32 @@ export class EmployeeAccessComponent implements OnInit {
       <br> área do operador: O proprietário pode ter acesso a todas as funionalidades que o operador possui.`
     },
     {
-      value: "admin",
+      value: "Administrator",
       name: "Administrador",
       description: `O Administrador tem poderes de cadastrar / remover funcionários, clientes e fornecedores.
       Também tem acesso ao balanço da empresa, metas, promoções, podendo  blá blá`
     },
     {
-      value: "operator",
+      value: "Operator",
       name: "Operador",
       description: `O Operador pode  bla bla.`
     },
     {
-      value: "accountant",
+      value: "Accountant",
       name: "Contador",
       description: `O Contador pode bla bla.`
     }
   ]
 
-  disabledAccess() {
+  // FUNCTIONS ******************************************
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+  fun_changeAccessRoleStatus() {
     this.accessEmitter.emit(this.access);
   }
 

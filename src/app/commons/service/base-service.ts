@@ -1,28 +1,35 @@
-import {HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {HttpHeaders} from "@angular/common/http";
 import {throwError} from "rxjs";
+import {LocalStorage} from "../storage/local-storage";
+import {environment} from "../../../environments/environment";
 
 export abstract class BaseService {
 
-  protected getHeader() {
+  baseUrl = environment.baseUrl
+
+  public localStorage = new LocalStorage()
+
+  protected getHeader(
+    language: string,
+    token?: string
+  ) {
     return {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'language': language,
+
       })
     };
   }
 
   protected extractData(response: any) {
-    return response.data || {};
+    return response;
   }
 
   protected responseError(response: Response | any) {
-    let customError: string[] = [];
-
-    if (response instanceof HttpErrorResponse) {
-      if (response.statusText === "Unknow Error") {
-        customError.push("Erro desconhecido");
-        response.error.errors = customError;
-      }
+    if (response.message.search("Unknown Error") != -1) {
+      response.error.errors = "Erro desconhecido. Tente novamente. Caso o erro persista, favor informar a RJ Desenvolvimento.";
     }
     return throwError(response);
   }
